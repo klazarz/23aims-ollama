@@ -2,7 +2,6 @@
 ####
 #### load Oracle sample data 
 ####
-OF
 
 mkdir tmp
 
