@@ -1,18 +1,21 @@
 # 23aims-ollama
- 23ai free with AI Microservices and Ollama
+ 23ai free with [AI Microservices Sandbox](https://oracle-samples.github.io/oaim-sandbox/) and Ollama.
 
  This docker compose setup, deploys the following container:
 
-| Container Name | Service                   |
-| -------------- | ------------------------- |
-| 23ai           | Oracle Database 23ai free |
-| ords           | ORDS including APEX       |
-| sql            | SQLcl                     |
-| aims           | AI Microservices Sandbox  |
+| Container Name | Service                                                                    |
+| -------------- | -------------------------------------------------------------------------- |
+| 23ai           | Oracle Database 23ai free                                                  |
+| ords           | ORDS including APEX                                                        |
+| sql            | SQLcl                                                                      |
+| aims           | [AI Microservices Sandbox](https://oracle-samples.github.io/oaim-sandbox/) |
 
 
 # Prerequisites
 - Docker CE installed (include Docker Compose)
+  - Note: Dependent on you installation the actual docker compose command might differ. This guide uses ```docker comppose```:
+    - ```docker comppose``` or alternatively,
+    - ```docker-compose```
 - Note: I have not tested Podman. There may be some changes required to the compose.yml in order to make it with with podman-compose
 
 # Get Started
@@ -22,7 +25,7 @@ After cloning the repo, run the deploy script:
 ./deploy.sh
 ```
 
-The deploy script will make sure that you have a directory for the database files and that some directories have the appropriate access priviliges.
+The deploy script will make sure that you have a directory for the database files and that some directories have the appropriate access privileges.
 It will also start the ```docker compose``` command.
 
 Please note: The script starts docker compose in the foreground. If you prefer running it in the background modify the deploy.sh script by adding the flag ```-d``` to the docker compose command.
@@ -40,9 +43,19 @@ Then start the init.sh script:
 ./init.sh
 ```
 
-This script will load Oracle sample schemas (CO, SH, HR).
+This script will load Oracle sample schemas (CO, SH, HR). 
 It will also create the user ```ora23ai```.
 All users will be ORDS-enabled.
+
+| User Name   | Password    |
+| ----------- | ----------- |
+| **ora23ai** | **ora23ai** |
+| admin       | Welcome23ai |
+| co          | Welcome23ai |
+| sh          | Welcome23ai |
+| sys         | Welcome23ai |
+| system      | Welcome23ai |
+
 
 # Post Deployment Ollama Models
 Now run the following command to start an interactive session in the Ollama container:
@@ -63,6 +76,7 @@ ollama pull all-minilm
 ```
 
 Now, we have loaded llama3.2 LLM and the all-minilm embedding model.
+Feel free to add other models.
 
 # Start using AI Microservices Sandbox
 
@@ -87,5 +101,38 @@ If you want to see the tables login to the database using SQL Developer Web:
 ```http://<localhost:8181>/ords```
 
 
+# Working with the container
 
+When running docker compose in the foreground, you can gracefully stop all containers using CTRL+C.
 
+You can restart all containers by entering:
+
+```
+sudo docker compose up
+```
+
+or to start in the background:
+
+```
+sudo docker compose up -d
+```
+
+You can stop selected containers:
+
+For example, to stop the SQLcl container, type:
+
+```
+sudo docker compose stop sqlcl
+```
+
+If you want to restart a selected container, for example, SQLcl, simply type:
+
+```
+sudo docker compose up -d
+```
+
+If you want to remove all files related to this configuration, type:
+
+```
+sudo docker system prune --all
+```

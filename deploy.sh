@@ -8,7 +8,7 @@ cp conn_string.txt ords_secrets/
 
 #Chmodding
 sudo chmod 777 oradata
-sudo chmod 777 ords_secrets
+sudo chmod -R 777 ords_secrets
 sudo chmod 777 ords_config
 
 
