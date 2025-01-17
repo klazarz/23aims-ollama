@@ -2,11 +2,14 @@
 
 #add folder for datbase files
 mkdir oradata
+mkdir ords_secrets
+
+cp conn_string.txt ords_secrets/
 
 #Chmodding
-chmod 777 oradata
-chmod 777 ords_secrets
-chmod 777 ords_config
+sudo chmod 777 oradata
+sudo chmod 777 ords_secrets
+sudo chmod 777 ords_config
 
 
 #Docker Compose (-d to start in background)
