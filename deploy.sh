@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#Let's flush iptables 
-sudo iptables -F
-
 #add folder for datbase files
 mkdir oradata
 
